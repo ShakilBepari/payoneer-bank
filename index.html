@@ -9,6 +9,85 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 class="text-center">Welcome to Payoneer Bank</h1>
+    
+    <div id="login-aria">
+        <h1 class="text-center">Welcome to Payoneer Bank</h1>
+        <div class="submit-aria">
+            <h4>Login</h4>
+            <input type="email" class="form-control" placeholder="Enter your email"><br>
+            <input type="password" class="form-control" placeholder="Enter your password"><br>
+            <button id="login" class="btn btn-success">Enter</button>
+        </div>
+    </div>
+    <div id="transaction-aria">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit status">
+                    <h5>Deposit</h5>
+                    <h2>$ <span id="currentDeposit">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$00</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h2>$ <span id="total-balance">1240</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-aria">
+                    <h4>Deposit</h4>
+                    <input type="text" class="form-control" name="" placeholder="$ amount you want to deposit" id="depositAmount"><br>
+                    <button id="depositBtn" class="btn btn-success">Deposit</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="submit-aria">
+                    <h4>Withdraw</h4>
+                    <input type="text" class="form-control" name="" placeholder="$ amount you want to withdraw" id=""><br>
+                    <button class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //login button event handler
+        const loginBtn = document.getElementById('login');
+        loginBtn.addEventListener('click',function(){
+            const loginAria = document.getElementById('login-aria');
+            loginAria.style.display = 'none';
+            const transactionAria = document.getElementById('transaction-aria');
+            transactionAria.style.display = 'block';
+        })
+
+        // deposit button event handler
+        const depositBtn = document.getElementById('depositBtn');
+        depositBtn.addEventListener('click',function(){
+            const depositAmount = document.getElementById('depositAmount').value;
+            const depositNum = parseFloat(depositAmount);
+
+            spanAddAmount(depositNum,"currentDeposit");
+            spanAddAmount(depositNum,"total-balance")
+
+
+            document.getElementById('depositAmount').value = "";
+        })
+
+        function spanAddAmount(depositNum,id){
+            const currentDeposit = document.getElementById(id).innerText;
+            const currentDepositNum = parseFloat(currentDeposit);
+            const total = depositNum + currentDepositNum;
+            document.getElementById(id).innerText = total;
+        }
+
+    </script>
 </body>
 </html>
